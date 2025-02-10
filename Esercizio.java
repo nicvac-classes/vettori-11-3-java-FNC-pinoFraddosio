@@ -46,7 +46,7 @@ class Esercizio {
         i = 0;
         while(i < N2){
             V[i] = W[i];
-            i++
+            i++;
         }
 
         return N2;
@@ -65,8 +65,37 @@ class Esercizio {
         return i;
     }
 
-    static int ElminaDuplicati(int[] V , int dimensione){
-        return dimensione -1;
+    static int ElminaDuplicati(int[] V , int N){
+        int i, j , k;
+        int N2;
+        int[] W = new int[N];
+        boolean spot = false;
+
+        k = 0;
+        i = 0;
+        while (i < N) {
+            spot = false;
+            j = i + 1;
+            while (j <  N && spot == false) {
+                if(V[i] == W[j]){
+                    spot = true;
+                }
+                j++;
+            }
+            if(spot == false){
+                W[k] = V[i];
+                k++;
+            }
+            i++;
+        }
+        
+        for(i = 0; i < k; i++){
+            V[i] = W[i];
+        }
+
+        N2 = k;
+
+        return N2;
     }
 
     static void VisualizzaVettore(int[] V, int dimensione){
@@ -99,6 +128,27 @@ class Esercizio {
         return N2;
     }
 
+    static int EliminaDuplicatiOtt(int[] V, int N){
+        int N2;
+        int i,j;
+        
+        i = 0;
+        while(i < N-1){
+            j = i + 1;
+            while(j < N){
+                if(V[i] == V[j]){
+                    N = EliminaElementiOtt(V, N, j);
+                }else{
+                    j++;
+                }
+            }
+            i++;
+        }
+
+        N2 = N;
+        return N2;
+    }
+
     //MAIN
 
     public static void main(String args[])
@@ -116,7 +166,7 @@ class Esercizio {
         }
 
         do{
-            System.out.println("Scegli un'opzione: \n 1. Inserisci elemento \n 2. Elimina elemento \n 3. Ricerca elemento \n 4. Elimina duplicati \n 5. Visualizza vettore \n 6. Elimina Elemento Ott. \n 7. Inserisci Elemento Ott. \n 8.Esci");
+            System.out.println("Scegli un'opzione: \n 1. Inserisci elemento \n 2. Elimina elemento \n 3. Ricerca elemento \n 4. Elimina duplicati \n 5. Visualizza vettore \n 6. Elimina Elemento Ott. \n 7. Inserisci Elemento Ott. \n 8. Elimina Duplicati Ott. \n 9.Esci ");
             System.out.print("Input: ");
             o = in.nextInt();
             if(o == 1){
@@ -167,6 +217,9 @@ class Esercizio {
                     i = in.nextInt();
                 }while(i<0 || i>=N);
                 N = InserisciElementoOtt(V,N,valore,i);
+            }
+            if(o == 8){
+                N = EliminaDuplicatiOtt(V, N);
             }
             if(o < 1 || i >9){
                 System.out.println("Inserire un valore valido");
